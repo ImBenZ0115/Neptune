@@ -102,7 +102,7 @@ public class GlobalListener implements Listener {
         if (player.getGameMode().equals(GameMode.CREATIVE)) return;
         Profile profile = API.getProfile(player);
         if (isPlayerNotInMatch(profile) && profile.getState() != ProfileState.IN_CUSTOM) {
-            event.setCancelled(true);
+            event.setCancelled(false);
         }
     }
 
@@ -115,7 +115,7 @@ public class GlobalListener implements Listener {
         if (profile.getState().equals(ProfileState.IN_CUSTOM)) return;
         if (profile.getState().equals(ProfileState.IN_SPECTATOR)) event.setCancelled(true);
         if (isPlayerNotInMatch(profile)) {
-            event.setCancelled(true);
+            event.setCancelled(false);
             ProfileState state = profile.getState();
             if (state.equals(ProfileState.IN_KIT_EDITOR)) {
                 player.sendMessage(CC.color("&cYou can't break blocks in the kit editor!"));
@@ -134,7 +134,7 @@ public class GlobalListener implements Listener {
         Profile profile = API.getProfile(player);
         if (profile != null && profile.getState().equals(ProfileState.IN_CUSTOM)) return;
         if (isPlayerNotInMatch(profile)) {
-            event.setCancelled(true);
+            event.setCancelled(false);
             player.sendMessage(CC.color("&cYou can't place liquids here!"));
         }
     }
@@ -174,7 +174,7 @@ public class GlobalListener implements Listener {
             if (attackerProfile != null && attackerProfile.getState().equals(ProfileState.IN_CUSTOM)) return;
             if (victimProfile != null && victimProfile.getState().equals(ProfileState.IN_CUSTOM)) return;
             if (isPlayerNotInMatch(attackerProfile) || isPlayerNotInMatch(victimProfile)) {
-                event.setCancelled(true);
+                event.setCancelled(false);
             }
         }
     }
@@ -186,7 +186,7 @@ public class GlobalListener implements Listener {
             if (profile == null) return;
             if (profile.getState().equals(ProfileState.IN_CUSTOM)) return;
             if (isPlayerNotInMatch(profile)) {
-                event.setCancelled(true);
+                event.setCancelled(false);
             }
         }
     }
